@@ -1,9 +1,11 @@
 from flask import jsonify
 from models import get_db
+from flask_jwt_extended import jwt_required, get_jwt_identity
 
 def register_routes(app):
 
     @app.route('/api/incidents', methods=['GET'])
+    @jwt_required()
     def list_incidents():
         conn = get_db()
         rows = conn.execute('SELECT * FROM incidents ORDER BY id DESC').fetchall()

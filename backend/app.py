@@ -1,13 +1,20 @@
 from flask import Flask
 from models import init_db
 import routes
+from flask_jwt_extended import JWTManager
+from config import Config
+from auth_routes import register_auth_routes
 
 app = Flask(__name__)
+app.config.from_object(Config)
+
+jwt = JWTManager(app)
 
 from flask_cors import CORS
 CORS(app)
 
 routes.register_routes(app)
+register_auth_routes(app)
 
 @app.route('/')
 def home():

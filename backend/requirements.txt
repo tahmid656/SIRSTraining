@@ -6,3 +6,5 @@ itsdangerous==2.2.0
 Jinja2==3.1.6
 MarkupSafe==3.0.3
 Werkzeug==3.1.8
+Flask-JWT-Extended==4.6.0
+bcrypt==4.2.0
