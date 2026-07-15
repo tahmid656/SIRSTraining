@@ -4,13 +4,14 @@ import { Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { SubmitReportComponent } from './submit-report/submit-report.component';
 import { IncidentDetailComponent } from './incident-detail/incident-detail.component';
+import { MyIncidentsComponent } from './my-incidents/my-incidents.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
   { path: 'login', component: LoginComponent },
+  { path: 'incidents', component: MyIncidentsComponent /* TODO: add canActivate: [authGuard] once login works */ },
   { path: '', redirectTo: 'submit-report', pathMatch: 'full' },
   { path: 'submit-report', component: SubmitReportComponent, canActivate: [authGuard] },
   { path: 'incidents/:id', component: IncidentDetailComponent, canActivate: [authGuard] },
-  // { path: 'incidents', component: IncidentListComponent, canActivate: [authGuard] },
   // { path: 'incidents/new', component: IncidentCreateComponent, canActivate: [authGuard] },
 ];

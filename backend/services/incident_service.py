@@ -7,7 +7,7 @@ from models.incident_model import (
 
 
 def list_all_incidents():
-    """Return all incidents."""
+    """Return all incidents (most recent first)."""
     return get_all_incidents()
 
 
