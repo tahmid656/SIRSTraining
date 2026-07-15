@@ -31,12 +31,12 @@ def get_incident_by_id(incident_id):
 
 
 def create_incident(data):
-    """Insert a new incident and return its ID."""
+    """Insert a new incident, record history, and return its ID."""
     conn = get_db()
     cursor = conn.execute(
         '''INSERT INTO incidents (title, category, severity, description, location,
-           incident_datetime, reporter_id)
-           VALUES (?, ?, ?, ?, ?, ?, ?)''',
+           incident_datetime, personnel_involved, reporter_id)
+           VALUES (?, ?, ?, ?, ?, ?, ?, ?)''',
         (
             data['title'],
             data['category'],
@@ -44,10 +44,18 @@ def create_incident(data):
             data.get('description'),
             data.get('location'),
             data['incident_datetime'],
+            data.get('personnel_involved'),
             data['reporter_id'],
         )
     )
-    conn.commit()
     incident_id = cursor.lastrowid
+
+    conn.execute(
+        '''INSERT INTO incident_history (incident_id, user_id, action, new_status, note)
+           VALUES (?, ?, ?, ?, ?)''',
+        (incident_id, data['reporter_id'], 'created', 'open', 'Incident report submitted'),
+    )
+
+    conn.commit()
     conn.close()
     return incident_id

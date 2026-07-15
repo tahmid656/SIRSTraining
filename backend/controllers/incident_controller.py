@@ -73,9 +73,16 @@ def create_incident():
     if missing:
         return jsonify({'error': f'Missing required fields: {", ".join(missing)}'}), 400
 
-    valid_severities = ('low', 'medium', 'high', 'critical')
+    valid_severities = ('low', 'medium', 'high')
     if data['severity'] not in valid_severities:
         return jsonify({'error': f'Severity must be one of: {", ".join(valid_severities)}'}), 400
+
+    valid_categories = (
+        'Security Breach', 'Equipment Malfunction',
+        'Personnel Conduct', 'Safety Hazard', 'Other',
+    )
+    if data['category'] not in valid_categories:
+        return jsonify({'error': f'Category must be one of: {", ".join(valid_categories)}'}), 400
 
     # --- Attach reporter ---
     data['reporter_id'] = int(user_id)
