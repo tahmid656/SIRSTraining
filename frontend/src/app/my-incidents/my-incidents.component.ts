@@ -1,6 +1,7 @@
 import { Component, OnInit, signal } from '@angular/core';
 import { DatePipe, TitleCasePipe } from '@angular/common';
-import { IncidentService, Incident } from '../services/incident.service';
+import { IncidentService } from '../services/incident.service';
+import { Incident } from '../models/incident.model';
 
 @Component({
   selector: 'app-my-incidents',
