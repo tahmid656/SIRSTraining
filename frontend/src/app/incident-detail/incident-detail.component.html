@@ -1,1 +1,59 @@
-<p>incident-detail works!</p>
+<div class="detail-page">
+  <!-- Loading -->
+  <div *ngIf="loading" class="loading">Loading incident details...</div>
+
+  <!-- Error -->
+  <div *ngIf="error" class="error-card">
+    <p>{{ error }}</p>
+    <button class="btn-outline" (click)="goBack()">Go Back</button>
+  </div>
+
+  <!-- Incident Detail -->
+  <div *ngIf="incident && !loading" class="detail-card">
+    <div class="card-header">
+      <span class="eyebrow">Incident #{{ incident.id }}</span>
+      <h2>{{ incident.title }}</h2>
+      <div class="meta-row">
+        <span class="badge" [ngClass]="getSeverityClass()">{{ incident.severity | uppercase }}</span>
+        <span class="badge status">{{ incident.status }}</span>
+        <span class="meta-text">{{ incident.category }}</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <h3>Details</h3>
+      <div class="info-grid">
+        <div class="info-item">
+          <span class="info-label">Date & Time</span>
+          <span class="info-value">{{ incident.incident_datetime }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Location</span>
+          <span class="info-value">{{ incident.location || '—' }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Status</span>
+          <span class="info-value">{{ incident.status }}</span>
+        </div>
+        <div class="info-item">
+          <span class="info-label">Submitted</span>
+          <span class="info-value">{{ incident.created_at }}</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="section" *ngIf="incident.description">
+      <h3>Description</h3>
+      <p class="description-text">{{ incident.description }}</p>
+    </div>
+
+    <div class="section" *ngIf="incident.personnel_involved">
+      <h3>Personnel Involved</h3>
+      <p class="description-text">{{ incident.personnel_involved }}</p>
+    </div>
+
+    <div class="action-row">
+      <button class="btn-outline" (click)="goBack()">Back</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,167 @@
+.detail-page {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  padding: 40px 16px;
+  background: #f4f5f7;
+}
+
+.loading {
+  color: #666;
+  font-size: 14px;
+  padding-top: 80px;
+}
+
+.error-card {
+  text-align: center;
+  padding-top: 80px;
+  color: #c62828;
+  font-size: 14px;
+}
+
+.detail-card {
+  width: 100%;
+  max-width: 720px;
+  background: #fff;
+  border-radius: 6px;
+  border: 1px solid #e0e0e0;
+  padding: 32px;
+}
+
+.card-header {
+  margin-bottom: 24px;
+}
+
+.eyebrow {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: #888;
+  margin-bottom: 4px;
+}
+
+h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin: 4px 0 12px;
+  color: #1a1a1a;
+}
+
+.meta-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 3px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.severity-high {
+  background: #fbe9e7;
+  color: #c62828;
+}
+
+.severity-medium {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.severity-low {
+  background: #e8f5e9;
+  color: #2e7d32;
+}
+
+.status {
+  background: #e3f2fd;
+  color: #1565c0;
+}
+
+.meta-text {
+  font-size: 13px;
+  color: #666;
+}
+
+.section {
+  margin-bottom: 24px;
+}
+
+h3 {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eee;
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+.info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.info-label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+  font-weight: 500;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #1a1a1a;
+}
+
+.description-text {
+  font-size: 14px;
+  color: #333;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+.action-row {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #eee;
+}
+
+.btn-outline {
+  padding: 8px 20px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #333;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.btn-outline:hover {
+  background: #f5f5f5;
+}
+
+@media (max-width: 600px) {
+  .info-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .detail-card {
+    padding: 20px;
+  }
+}

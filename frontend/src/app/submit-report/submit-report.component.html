@@ -9,7 +9,8 @@
     <!-- Success message -->
     <div *ngIf="success" class="alert alert-success">
       {{ success }}
-      <button class="link-btn" (click)="success = null">Submit another</button>
+      <a class="link-btn" [routerLink]="['/incidents', createdId]">View Report</a>
+      <button class="link-btn" (click)="success = null; createdId = null">Submit another</button>
     </div>
 
     <!-- Error message -->

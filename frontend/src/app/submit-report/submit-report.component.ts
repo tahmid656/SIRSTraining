@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { IncidentService } from '../services/incident.service';
 
 @Component({
   selector: 'app-submit-report',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, RouterLink],
   templateUrl: './submit-report.component.html',
   styleUrl: './submit-report.component.css'
 })
@@ -16,6 +16,7 @@ export class SubmitReportComponent {
   submitting = false;
   error: string | null = null;
   success: string | null = null;
+  createdId: number | null = null;
 
   severities = [
     { value: 'high', label: 'High — immediate response required' },
@@ -61,6 +62,7 @@ export class SubmitReportComponent {
       next: (res) => {
         this.submitting = false;
         this.success = res.message;
+        this.createdId = res.id;
         this.form.reset();
       },
       error: (err) => {
