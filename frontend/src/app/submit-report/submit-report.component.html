@@ -1,1 +1,94 @@
-<p>submit-report works!</p>
+<div class="submit-page">
+  <div class="submit-card">
+    <div class="card-header">
+      <span class="eyebrow">New Entry</span>
+      <h2>Submit Incident Report</h2>
+      <p class="desc">All fields marked with <span class="req-star">*</span> are mandatory. Reports are timestamped and routed to the duty officer on submission.</p>
+    </div>
+
+    <!-- Success message -->
+    <div *ngIf="success" class="alert alert-success">
+      {{ success }}
+      <a class="link-btn" [routerLink]="['/incidents', createdId]">View Report</a>
+      <button class="link-btn" (click)="success = null; createdId = null">Submit another</button>
+    </div>
+
+    <!-- Error message -->
+    <div *ngIf="error" class="alert alert-error">{{ error }}</div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" *ngIf="!success">
+      <h3 class="section-title">Incident Details</h3>
+
+      <!-- Title -->
+      <div class="field">
+        <label class="req">Report Title</label>
+        <input type="text" formControlName="title" placeholder="Brief summary of the incident" />
+        <span class="field-error" *ngIf="form.get('title')?.touched && form.get('title')?.hasError('required')">
+          Report title is required.
+        </span>
+      </div>
+
+      <!-- Severity + Category row -->
+      <div class="field-row">
+        <div class="field">
+          <label class="req">Severity</label>
+          <select formControlName="severity">
+            <option value="" disabled>Select severity</option>
+            <option *ngFor="let s of severities" [value]="s.value">{{ s.label }}</option>
+          </select>
+          <span class="field-error" *ngIf="form.get('severity')?.touched && form.get('severity')?.hasError('required')">
+            Severity is required.
+          </span>
+        </div>
+        <div class="field">
+          <label class="req">Category</label>
+          <select formControlName="category">
+            <option value="" disabled>Select category</option>
+            <option *ngFor="let c of categories" [value]="c">{{ c }}</option>
+          </select>
+          <span class="field-error" *ngIf="form.get('category')?.touched && form.get('category')?.hasError('required')">
+            Category is required.
+          </span>
+        </div>
+      </div>
+
+      <!-- DateTime + Location row -->
+      <div class="field-row">
+        <div class="field">
+          <label class="req">Date & Time of Incident</label>
+          <input type="datetime-local" formControlName="incident_datetime" />
+          <span class="field-error" *ngIf="form.get('incident_datetime')?.touched && form.get('incident_datetime')?.hasError('required')">
+            Date and time are required.
+          </span>
+        </div>
+        <div class="field">
+          <label>Location</label>
+          <input type="text" formControlName="location" placeholder="Sector / Grid reference" />
+          <span class="field-help">GPS auto-tag available on mobile</span>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="field">
+        <label class="req">Description</label>
+        <textarea formControlName="description" rows="5" placeholder="Provide a full account of what occurred..."></textarea>
+        <span class="field-error" *ngIf="form.get('description')?.touched && form.get('description')?.hasError('required')">
+          Description is required.
+        </span>
+      </div>
+
+      <!-- Personnel Involved -->
+      <div class="field">
+        <label>Personnel Involved</label>
+        <input type="text" formControlName="personnel_involved" placeholder="Search by name or service ID..." />
+      </div>
+
+      <!-- Actions -->
+      <div class="action-row">
+        <button type="submit" class="btn-primary" [disabled]="submitting">
+          {{ submitting ? 'Submitting...' : 'Submit Report' }}
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

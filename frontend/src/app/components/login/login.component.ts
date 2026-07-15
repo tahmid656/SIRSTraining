@@ -9,7 +9,7 @@ import { AuthService } from '../../services/auth.service';
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrl: './login.component.css'
 })
 export class LoginComponent {
   form: FormGroup;
@@ -39,7 +39,7 @@ export class LoginComponent {
     this.authService.login(this.form.value).subscribe({
       next: () => {
         this.submitting = false;
-        this.router.navigate(['/incidents']);
+        this.router.navigate(['/submit-report']);
       },
       error: (err) => {
         this.submitting = false;

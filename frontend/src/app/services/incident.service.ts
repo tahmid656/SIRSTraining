@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { Incident, CreateIncidentPayload, CreateIncidentResponse } from '../models/incident.model';
 
 export interface Incident {
   id: number;
@@ -44,15 +45,11 @@ export class IncidentService {
     return this.http.get<Incident[]>(`${this.baseUrl}/mine`);
   }
 
-  /** GET /api/incidents/:id — fetch full detail of a single incident */
-  getIncidentById(id: number): Observable<Incident> {
-    // TODO: implement
+  getById(id: number): Observable<Incident> {
     return this.http.get<Incident>(`${this.baseUrl}/${id}`);
   }
 
-  /** POST /api/incidents — submit a new incident report */
-  createIncident(payload: CreateIncidentPayload): Observable<Incident> {
-    // TODO: implement
-    return this.http.post<Incident>(this.baseUrl, payload);
+  create(payload: CreateIncidentPayload): Observable<CreateIncidentResponse> {
+    return this.http.post<CreateIncidentResponse>(this.baseUrl, payload);
   }
 }
